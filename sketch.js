@@ -7,20 +7,52 @@ function setup() {
   starFill = randomColor() 
   fill(starFill)
   noStroke() 
+  
+  star = breathingStar(width/4, height/4, 50, 100, 12, 0.05)
 }
 
 function draw() {
   background(bg) 
-  //let ir = innerRadius
   // Task 2: create an object, and an accompanying function, that allows for 
   //   "breathing a variable" (having it fluctuate within a given range by
   //   a given step). 
   // Alternate Task 2: implement breathing of the inner and outer radii
   //   through the use of trigonometric functions (like sin or cos). Remember 
   //   that these functions, by default, are in radians [0,TWO_PI]
-  drawStar()
-  drawStar(20,20,20)
+  makeStar()
 }
+
+
+function makeStar() {
+  growStar(star)
+  showStar(star)
+}
+
+function breathingStar(mx, my, innerRadius, outerRadius, numSides, growSpeed){
+  
+  return{
+    mx: mx,
+    my: my, 
+    innerRadius: innerRadius,
+    outerRadius: outerRadius,
+    numSides: numSides,
+    growSpeed: growSpeed,
+    ir: innerRadius,
+    or: outerRadius,
+    grows: 0,
+  }
+}
+
+function growStar(s) {
+  s.grows += s.growSpeed
+  s.ir = s.innerRadius + 10 * sin(s.grows)
+  s.or = s.outerRadius + 20 * cos(s.grows)
+}
+
+function showStar(s) {
+  drawStar(s.mx, s.my, s.numSides, s.ir, s.or)
+}
+
 
 // Task 1: parameterize this function for inner and outer radii and number of sides
 function drawStar( mx = width/2, my = height/2, numberOfSides = 7, ir = 50, or = 100 ) {
