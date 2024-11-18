@@ -11,6 +11,7 @@ function setup() {
 
 function draw() {
   background(bg) 
+  //let ir = innerRadius
   // Task 2: create an object, and an accompanying function, that allows for 
   //   "breathing a variable" (having it fluctuate within a given range by
   //   a given step). 
@@ -18,14 +19,12 @@ function draw() {
   //   through the use of trigonometric functions (like sin or cos). Remember 
   //   that these functions, by default, are in radians [0,TWO_PI]
   drawStar()
+  drawStar(20,20,20)
 }
 
 // Task 1: parameterize this function for inner and outer radii and number of sides
-function drawStar( mx = width/2, my = height/2 ) {
-  let numberOfSides = 7
+function drawStar( mx = width/2, my = height/2, numberOfSides = 7, ir = 50, or = 100 ) {
   let numberOfPoints = numberOfSides * 2
-  let ir = 50
-  let or = 100
   let theta = 0
   let dt = TWO_PI/numberOfPoints
 
